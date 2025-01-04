@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <title>TRAVEL BLOG</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background-color: rgb(1, 70, 58);
+            color: rgb(13, 13, 14);
+        }
+
+        .nav-item {
+            color: #81c4eb;
+        }
+
+        aside {
+            color: rgb(1, 70, 58);
+        }
+
+        aside a {
+            text-decoration: none;
+        }
+
+        .list-group-item {
+            background-color: rgb(1, 70, 58);
+            border: none;
+            margin-bottom: 10px;
+        }
+
+        .list-group-item a {
+            color: #ffffff;
+        }
+
+        .btn {
+            background-color: aliceblue;
+            color: rgb(1, 70, 58);
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card-img {
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .sidebar {
+            height: 300vh;
+            padding-top: 20px;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+
+        #c-1 {
+            height: 550px;
+        }
+
+        .col-md-2 {
+            background-color: rgb(1, 70, 58);
+        }
+
+        .color {
+            background-color: rgb(186, 123, 246);
+            color: white;
+            padding: 10px;
+            margin-bottom: 30px;
+
+        }
+
+        .color a {
+            /* background-color: rgb(186, 123, 246); */
+            color: white;
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        .card-body h1 {
+            font-size: 30px;
+            color: black;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><i class="fa-solid fa-plane-departure"></i> TRAVEL</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <form class="d-flex ms-auto">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row my-1">
+            <aside class="col-md-2 sidebar">
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="/dashboard"><i class="fa-solid fa-house-user"></i>
+                            Dashboard</a></li>
+                    <li class="list-group-item"><a href="/travel"><i class="fa-solid fa-plane"></i> Travel</a></li>
+                    <li class="list-group-item"><a href="/eat"><i class="fa-solid fa-utensils"></i> Eat</a></li>
+                    <li class="list-group-item"><a href="/relax"><i class="fa-solid fa-couch"></i> Relax</a></li>
+                </ul>
+                <a href="/add" class="btn mt-3">Add Blog</a>
+            </aside>
+
+            <main class="col-md-10 main-content">
+
+                <div class="color">
+                    <% const categories=['All', 'Food' , 'Travel' , 'News' , 'Fashion' , 'Music' ]; %>
+                        <div>
+                            <% categories.forEach(category=> { %>
+                                <a href="<%= category === 'All' ? '/view' : `/view?category=${category}` %>">
+                                    <%= category %>
+                                </a>
+                                <% }) %>
+                        </div>
+                </div>
+                <div class="content col-md-10">
+                    <div class="row">
+                        <% blogs.forEach(blog=> { %>
+                            <div class="col-md-4 mb-3">
+                                <div class="card">
+                                    <img src="<%= blog.image %>" class="card-img-top card-img" alt="<%= blog.title %>">
+                                    <div class="card-body">
+                                        <h1 class="card-title">
+                                            <%= blog.title %>
+                                        </h1>
+                                        <p class="card-category">
+                                            <%= blog.category %>
+                                        </p>
+                                        <p class="card-text">
+                                            <%= blog.content %>
+                                        </p>
+                                        <a href="/deleteData/<%= blog.id %>" class="btn bg-dark text-light">Delete</a>
+                                        <a href="/edit?id=<%= blog.id %>" class="btn bg-dark text-light">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-1c0b8e5e1f3e0c1f3b1c0b8e5e1f3e0c1f3b1c0b8e5e1f3e0c1f3b1c0b8e5e1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-c0b8e5e1f3e0c1f3b1c0b8e5e1f3e0c1f3b1c0b8e5e1f3e0c1f3b1c0b8e5e1"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
