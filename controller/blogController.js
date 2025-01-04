@@ -1,131 +1,13 @@
 const UserModel = require('../model/UserModel');
 const blogModel = require('../model/blogModel');
 const fs = require('fs');
-const path= require("path")
+const path = require("path")
 
-const registerPage = (req,res) =>{
-    return res.render('register')
-}
-
-const loginPage = (req,res) =>{
-    if(req.isAuthenticated()){
-        return res.redirect("/dashboard");
-    }
-    return res.render("login");
-}
-
-const dashboardPage = (req,res) =>{
-    return res.render("dashboard");
-}
-
-const registerrecord = async (req,res) =>{
-    try{
-       const {name,email,password} = req.body;
-
-     await UserModel.create({
-        name:name,
-        email:email,
-        password:password,
-       })
-       console.log("succesfully register");
-       return res.redirect('/');
-       
-    }
-    catch(err){
-        console.log(err);
-        return false;
-    }
-}
-
-const loginrecord = async (req,res) =>{
-    try{
-       const  {email,password} = req.body;
-       const user = await UserModel.findOne({email:email});
-       if(!user || user.password != password){
-        console.log("Email and Password not valid");
-        return res.redirect('/');
-       }
-
-       res.cookie('auth',user)
-       return res.redirect('/dashboard')
-    }
-    catch(err){
-        console.log(err)
-        return false;
-    }
-};
-
-const logout = (req,res) => {
-    req.session.destroy((err)=>{
-        if(err){
-            console.log(err);
-        }
-        return res.redirect("/");
-    })
-}
-
-const blog = (req,res) =>{
-    // if(!req.cookies['auth']){
-    //     return res.redirect('/')
-    // }
-    // return res.render('blog')
-    if(req.isAuthenticated()){
-        return res.redirect("/");
-    }
-    return res.render("blog");
-}
-
-const eat = (req,res) =>{
-    // if(!req.cookies['auth']){
-    //     return res.redirect('/')
-    // }
-    // return res.render('eat')
-    if(req.isAuthenticated()){
-        return res.redirect("/");
-    }
-    return res.render("eat");
-}
-
-const relax = (req,res) =>{
-    // if(!req.cookies['auth']){
-    //     return res.redirect('/')
-    // }
-    // return res.render('relax')
-    if(req.isAuthenticated()){
-        return res.redirect("/");
-    }
-    return res.render("relax");
-}
-
-const add = (req,res) =>{
-    // if(!req.cookies['auth']){
-    //     return res.redirect('/')
-    // }
-    if(req.isAuthenticated()){
-        return res.redirect("/");
-    }
-    console.log("Add route accessed"); 
-     
+const add = (req, res) => {
     return res.render('add')
 }
 
-const addRecord = async(req,res) =>{
-    // try {
-    //     const {title,content} = req.body;
-
-    //     await blogModel.create({
-    //         title:title,
-    //         content:content,
-    //         image:req.file.path,
-    // })
-    // console.log("Blog add Sucssefull");
-    // return res.redirect('/view');
-        
-    // } catch (err) {
-    //     console.log(err);
-    //     return false
-    // }
-
+const addRecord = async (req, res) => {
     try {
         let imagePath = "";
         if (req.file) {
@@ -136,7 +18,7 @@ const addRecord = async(req,res) =>{
         let newAdmin = await blogModel.create(req.body);
         if (newAdmin) {
             console.log("New Blog Added...");
-            return res.redirect("/view")
+            return res.redirect("/dashboard")
         } else {
             console.log("Somthing Wrong...");
             return res.redirect("back")
@@ -148,62 +30,59 @@ const addRecord = async(req,res) =>{
     }
 }
 
-const view= async (req, res)=>{
-    try {
-        let blogs = await blogModel.find({});
-        const category = req.query.category;
-        let allblog;
-        if(category && category!=='All')
-        {
-            allblog=await blogModel.find({category})
-        }
-        else{
-            allblog=await blogModel.find()
-        }
-
-        return res.render('view',{blogs: allblog })
-        
-    } catch (error) {
-        console.log(error);
-        return false
-        
+const eat = (req, res) => {
+    // if(!req.cookies['auth']){
+    //     return res.redirect('/')
+    // }
+    // return res.render('eat')
+    if (req.isAuthenticated()) {
+        return res.redirect("/");
     }
+    return res.render("eat");
 }
 
-const deleteData = async(req,res) =>{
+const relax = (req, res) => {
+    // if(!req.cookies['auth']){
+    //     return res.redirect('/')
+    // }
+    // return res.render('relax')
+    if (req.isAuthenticated()) {
+        return res.redirect("/");
+    }
+    return res.render("relax");
+}
+
+const deleteData = async (req, res) => {
     let rec = await blogModel.findById(req.params.id);
-    console.log(rec);
-    if(rec){
+    if (rec) {
         try {
-            let imagepath = path.join(__dirname, "..", rec.image)
-        // console.log(imagepath);
-        await fs.unlinkSync(imagepath);
+            await blogModel.findByIdAndDelete(req.params.id);
+            console.log("Delete Success");
+            return res.redirect('/dashboard');
         } catch (error) {
             console.log(error)
         }
-        await blogModel.findByIdAndDelete(req.params.id);
-        console.log("Delete Success");
-        return res.redirect('/view');
-    }else{
-        console.log('Somthing Wrong');
-        return res.redirect('/view');
+    } else {
+        console.log("Blog Not Found");
+        return res.redirect('back');
     }
 }
 
-const editData = async (req,res) =>{
+const editData = async (req, res) => {
     try {
         let id = req.query.id;
         let blog = await blogModel.findById(id);
-        return res.render('edit',{ blog
+        return res.render('edit', {
+            blog
         })
-        
+
     } catch (error) {
         console.log(error);
         return false;
     }
 }
 
-const updateRecord = async(req,res) => {
+const updateRecord = async (req, res) => {
     try {
         let record = await blogModel.findById(req.params.id);
         if (record) {
@@ -235,6 +114,4 @@ const updateRecord = async(req,res) => {
     }
 }
 
-module.exports = {
-    registerPage ,loginPage , dashboardPage , registerrecord , loginrecord , logout , blog , eat , relax , add , addRecord , view , deleteData , editData , updateRecord
-}
+module.exports = { eat, relax, add, addRecord, deleteData, editData, updateRecord }

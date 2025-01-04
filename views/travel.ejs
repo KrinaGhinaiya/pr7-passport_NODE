@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 
     <title>TRAVEL BLOG</title>
@@ -12,156 +14,164 @@
             font-family: 'Courier New', Courier, monospace;
             background-color: #f8f9fa;
         }
+
         header {
             background-color: rgb(1, 70, 58);
             color: rgb(13, 13, 14);
         }
+
         .nav-item {
             color: #81c4eb;
         }
+
         aside {
             color: rgb(1, 70, 58);
         }
+
         aside a {
             text-decoration: none;
         }
+
         .list-group-item {
             background-color: rgb(1, 70, 58);
             border: none;
             margin-bottom: 10px;
         }
+
         .list-group-item a {
             color: #ffffff;
         }
+
         .btn {
             background-color: aliceblue;
             color: rgb(1, 70, 58);
         }
+
         .card {
             margin-bottom: 20px;
         }
+
         .card-img {
             height: 200px;
             object-fit: cover;
         }
+
         .sidebar {
             height: 200vh;
             padding-top: 20px;
         }
+
         .main-content {
             padding: 20px;
         }
-        #c-1{
+
+        #c-1 {
             height: 550px;
         }
-        .col-md-2{
+
+        .col-md-2 {
             background-color: rgb(1, 70, 58);
         }
     </style>
 
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">TRAVEL</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <form class="d-flex ms-auto">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-        </nav>
-    </header>
+    <%- include('header.ejs') %>
 
-    <div class="container-fluid">
-        <div class="row my-1">
-            <aside class="col-md-2 sidebar">
-                <ul class="list-group">
-                    <li class="list-group-item"><a href="/dashboard"><i class="fa-solid fa-house-user"></i>  Dashboard</a></li>
-                    <li class="list-group-item"><a href="/travel"><i class="fa-solid fa-plane"></i> Travel</a></li>
-                    <li class="list-group-item"><a href="/eat"><i class="fa-solid fa-utensils"></i> Eat</a></li>
-                    <li class="list-group-item"><a href="/relax"><i class="fa-solid fa-couch"></i> Relax</a></li>
-                </ul>
-                <a href="/add" class="btn mt-3">Add Blog</a>
-            </aside>
+        <div class="container-fluid">
+            <div class="row my-1">
+                <%- include('headerSideBar.ejs') %>
 
-            <main class="col-md-10 main-content">
-                <div class="row">
+                    <main class="col-md-10 main-content">
+                        <div class="row">
 
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="../images/trail.avif" class="card-img-top card-img" alt="Istanbul">
-                        <div class="card-body">
-                            <h5 class="card-title">Istanbul Heritage Trail</h5>
-                            <p class="card-text">Explore the vibrant culture and history of Istanbul, where East meets West.</p>
-                            <a href="/travel/istanbul-heritage-trail" class="btn btn-primary">Read More</a>                        </div>
-                    </div>
-                </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <img src="../images/trail.avif" class="card-img-top card-img" alt="Istanbul">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Istanbul Heritage Trail</h5>
+                                        <p class="card-text">Explore the vibrant culture and history of Istanbul, where
+                                            East
+                                            meets West.</p>
+                                        <a href="/travel/istanbul-heritage-trail" class="btn btn-primary">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="../images/tr-3.avif" class="card-img-top card-img" alt="Cappadocia">
-                            <div class="card-body">
-                                <h5 class="card-title">Turkish Extravaganza</h5>
-                                <p class="card-text">Experience the unique landscapes and hot air balloon rides in Cappadocia.</p>
-                                <a href="/travel/turkish-extravaganza" class="btn btn-primary">Read More</a>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <img src="../images/tr-3.avif" class="card-img-top card-img" alt="Cappadocia">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Turkish Extravaganza</h5>
+                                        <p class="card-text">Experience the unique landscapes and hot air balloon rides
+                                            in
+                                            Cappadocia.</p>
+                                        <a href="/travel/turkish-extravaganza" class="btn btn-primary">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <img src="../images/palace.avif" class="card-img-top card-img" alt="Kas">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Istanbul Palace</h5>
+                                        <p class="card-text">Discover the charming coastal town of Kas, perfect for
+                                            relaxation and adventure.</p>
+                                        <a href="/travel/istanbul-palace" class="btn btn-primary">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <img src="../images/antalya.webp" class="card-img-top card-img" alt="Antalya">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Antalya</h5>
+                                        <p class="card-text">Enjoy the beautiful beaches and rich history of Antalya.
+                                        </p>
+                                        <a href="/travel/antalya" class="btn btn-primary">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <img src="../images/ankara.jpg" class="card-img-top card-img" alt="Ankara">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Ankara</h5>
+                                        <p class="card-text">Explore the capital city of Turkey, rich in culture and
+                                            history.</p>
+                                        <a href="/travel/istanbul-ankara" class="btn btn-primary">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <img src="../images/pamukkale.jpg" class="card-img-top card-img" alt="Pamukkale">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Pamukkale</h5>
+                                        <p class="card-text">Visit the stunning terraces of Pamukkale, known for its
+                                            thermal
+                                            springs.</p>
+                                        <a href="/travel/pamukkale" class="btn btn-primary">Read More</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="../images/palace.avif" class="card-img-top card-img" alt="Kas">
-                            <div class="card-body">
-                                <h5 class="card-title">Istanbul Palace</h5>
-                                <p class="card-text">Discover the charming coastal town of Kas, perfect for relaxation and adventure.</p>
-                                <a href="/travel/istanbul-palace" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="../images/antalya.webp" class="card-img-top card-img" alt="Antalya">
-                            <div class="card-body">
-                                <h5 class="card-title">Antalya</h5>
-                                <p class="card-text">Enjoy the beautiful beaches and rich history of Antalya.</p>
-                                <a href="/travel/antalya" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="../images/ankara.jpg" class="card-img-top card-img" alt="Ankara">
-                            <div class="card-body">
-                                <h5 class="card-title">Ankara</h5>
-                                <p class="card-text">Explore the capital city of Turkey, rich in culture and history.</p>
-                                <a href="/travel/istanbul-ankara" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="../images/pamukkale.jpg" class="card-img-top card-img" alt="Pamukkale">
-                            <div class="card-body">
-                                <h5 class="card-title">Pamukkale</h5>
-                                <p class="card-text">Visit the stunning terraces of Pamukkale, known for its thermal springs.</p>
-                                <a href="/travel/pamukkale" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             </main>
         </div>
-    </div>
+        </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-1c0b8e5e1f3e0c1f3b1c0b8e5e1f3e0c1f3b1c0b8e5e1f3e0c1f3b1c0b8e5e1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-c0b8e5e1f3e0c1f3b1c0b8e5e1f3e0c1f3b1c0b8e5e1f3e0c1f3b1c0b8e5e1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-1c0b8e5e1f3e0c1f3b1c0b8e5e1f3e0c1f3b1c0b8e5e1f3e0c1f3b1c0b8e5e1"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-c0b8e5e1f3e0c1f3b1c0b8e5e1f3e0c1f3b1c0b8e5e1f3e0c1f3b1c0b8e5e1"
+            crossorigin="anonymous"></script>
 </body>
+
 </html>
